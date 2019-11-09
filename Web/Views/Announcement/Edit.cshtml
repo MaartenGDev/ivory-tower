@@ -1,0 +1,30 @@
+@model Web.Models.ManageAnnouncementModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h4>@(Model.Announcement.Body == null ? "Create" : "Update") Announcement</h4>
+
+<div class="row">
+    <div class="card  col-12">
+        <div class="card-body">
+            <form asp-controller="Announcement" asp-ann asp-action="@(Model.Announcement.Body == null ? "Store" : "Update")"  method="post" asp-route-announcementId="@Model.Announcement.Id">
+                <div class="form-group">
+                    <label for="inputCategory">Category</label>
+                    <select name="CategoryId" id="inputCategory" class="form-control">
+                        @foreach (var category in Model.AnnouncementCategories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputBody">Body</label>
+                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Body" value="@Model.Announcement.Body">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
