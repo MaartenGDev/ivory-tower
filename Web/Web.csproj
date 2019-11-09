@@ -5,17 +5,21 @@
         <UserSecretsId>aspnet-Web-B75F3386-8F2D-4993-984F-E85EF331B853</UserSecretsId>
     </PropertyGroup>
 
-
     <ItemGroup>
-        <None Update="app.db" CopyToOutputDirectory="PreserveNewest"/>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0"/>
+      <_ContentIncludedByDefault Remove="wwwroot\lib\tailwind\dist\tailwind.min.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataContext\DataContext.csproj" />
     </ItemGroup>
 
 </Project>

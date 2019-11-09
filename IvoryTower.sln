@@ -9,6 +9,8 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContext", "DataContext\DataContext.csproj", "{F1735764-5757-45A8-AE25-163CC4E37F52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{BD4256F0-EB38-4B07-B096-6A3A47D86E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD4256F0-EB38-4B07-B096-6A3A47D86E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD4256F0-EB38-4B07-B096-6A3A47D86E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1735764-5757-45A8-AE25-163CC4E37F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1735764-5757-45A8-AE25-163CC4E37F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1735764-5757-45A8-AE25-163CC4E37F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1735764-5757-45A8-AE25-163CC4E37F52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
