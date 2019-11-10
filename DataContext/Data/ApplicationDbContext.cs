@@ -18,12 +18,18 @@ namespace DataContext.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<Announcement>()
                 .HasKey(a => new {a.Id});
             
+            modelBuilder.Entity<Announcement>()
+                .Property(b => b.PublishedAt)
+                .HasDefaultValueSql("getdate()");
+
             modelBuilder.Entity<AnnouncementCategory>()
                 .HasKey(a => new {a.Id});
+            
+            
         }
     }
 }

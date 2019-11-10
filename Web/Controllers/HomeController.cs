@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DataContext.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Web.Models;
 
@@ -11,16 +13,25 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = new HomeIndexModel
+            {
+                Announcements = _context.Announcements
+                    .Include(x => x.Category)
+                    .Include(x => x.User)
+                    .OrderByDescending(x => x.PublishedAt)
+                    .ToList()
+            };
+            
+            return View(model);
         }
 
         public IActionResult Privacy()

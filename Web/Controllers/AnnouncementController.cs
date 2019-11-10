@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using DataContext.Data;
 using DataContext.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web.Models;
 
 namespace Web.Controllers
@@ -18,7 +20,15 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new IndexAnnouncementModel
+            {
+                Announcements = _context.Announcements
+                    .Include(x => x.Category)
+                    .Include(x => x.User)
+                    .ToList()
+            };
+            
+            return View(model);
         }
         
         [HttpGet]
@@ -36,6 +46,8 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Store(Announcement announcement)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            announcement.User = _context.Users.Single(x => x.Id == userId);
             _context.Announcements.Add(announcement);
             _context.SaveChanges();
 

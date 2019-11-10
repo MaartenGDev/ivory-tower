@@ -1,41 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Humanizer
+@model Web.Models.HomeIndexModel
+
 
 <div class="row">
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
-                <div>
-                    <h5>Architecture Update 🔥</h5>
-                    <p>Added Direct-Wifi Alternative to Peer-to-peer client discovery</p>
+                @foreach (var announcement in Model.Announcements)
+                {
+                    <div>
+                        <h5>@announcement.Category.Name</h5>
+                        <p>@announcement.Body</p>
 
-                    <div class="d-flex justify-content-between">
-                        <span class="text-info">Architects</span>
-                        <span class="text-black-50">15 hours ago</span>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-info">@announcement.User.UserName.Split("@").First()</span>
+                            <span class="text-black-50">@announcement.PublishedAt.Humanize()</span>
+                        </div>
+                        @if (announcement.Id != Model.Announcements.Last().Id)
+                        {
+                            <hr/>
+                        }
                     </div>
-                    <hr/>
-                </div>
-                <div>
-                    <h5>Research 📖</h5>
-                    <p>Added postgresql to distrubted database research paper, it looks like a good canidate!</p>
-
-                    <div class="d-flex justify-content-between">
-                        <span class="text-info">Research Papers</span>
-                        <span class="text-black-50">2 days ago</span>
-                    </div>
-                    <hr/>
-                </div>
-
-                <div>
-                    <h5>Architecture Update 🔥</h5>
-                    <p>Added Direct-Wifi Alternative to Peer-to-peer client discovery</p>
-
-                    <div class="d-flex justify-content-between">
-                        <span class="text-info">Architects</span>
-                        <span class="text-black-50">15 hours ago</span>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
