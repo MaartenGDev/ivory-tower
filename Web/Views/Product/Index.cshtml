@@ -1,0 +1,26 @@
+@model Web.Models.Products.ProductIndexModel
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-success" asp-area="" asp-controller="Product" asp-action="Create">Create</a>
+</div>
+<table class="table mt-2">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Tasks Count</th>
+        <th scope="col">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Tasks.Count</td>
+            <td>
+                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-announcementId="@product.Id">Edit</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -9,6 +9,8 @@ namespace DataContext.Data
     {
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<AnnouncementCategory> AnnouncementCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<TaskStatus> TaskStatuses { get; set; }
         
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -29,7 +31,8 @@ namespace DataContext.Data
             modelBuilder.Entity<AnnouncementCategory>()
                 .HasKey(a => new {a.Id});
             
-            
+            modelBuilder.Entity<Product>()
+                .HasKey(p => new {p.Id});
         }
     }
 }

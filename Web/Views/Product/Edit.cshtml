@@ -1,24 +1,24 @@
-@model Web.Models.Announcements.ManageAnnouncementModel
+@model Web.Models.Products.ManageProductModel
 
-<h4>@(Model.Announcement.Body == null ? "Create" : "Update") Announcement</h4>
+<h4>@(Model.Product.Name == null ? "Create" : "Update") Product</h4>
 
 <div class="row">
     <div class="card  col-12">
         <div class="card-body">
-            <form asp-controller="Announcement" asp-ann asp-action="@(Model.Announcement.Body == null ? "Store" : "Update")"  method="post" asp-route-announcementId="@Model.Announcement.Id">
+            <form asp-controller="Product" asp-ann asp-action="@(Model.Product.Name == null ? "Store" : "Update")"  method="post" asp-route-productId="@Model.Product.Id">
                 <div class="form-group">
                     <label for="inputCategory">Category</label>
                     <select name="CategoryId" id="inputCategory" class="form-control">
-                        @foreach (var category in Model.AnnouncementCategories)
+                        @foreach (var status in Model.TaskStatuses)
                         {
-                            <option value="@category.Id">@category.Name</option>
+                            <option value="@status.Id">@status.Name</option>
                         }
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="inputBody">Body</label>
-                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Body" value="@Model.Announcement.Body">
+                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Body" value="@Model.Product.Name">
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>

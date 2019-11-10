@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using DataContext.Models;
 
-namespace Web.Models
+namespace Web.Models.Announcements
 {
-    public class IndexAnnouncementModel
+    public class AnnouncementIndexModel
     {
         public List<Announcement> Announcements { get; set; }
     }

@@ -6,6 +6,7 @@ using DataContext.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
+using Web.Models.Announcements;
 
 namespace Web.Controllers
 {
@@ -20,7 +21,7 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var model = new IndexAnnouncementModel
+            var model = new AnnouncementIndexModel
             {
                 Announcements = _context.Announcements
                     .Include(x => x.Category)

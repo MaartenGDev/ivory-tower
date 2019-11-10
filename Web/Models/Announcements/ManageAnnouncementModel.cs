@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DataContext.Models;
 
-namespace Web.Models
+namespace Web.Models.Announcements
 {
     public class ManageAnnouncementModel
     {
