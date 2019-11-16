@@ -31,10 +31,10 @@ namespace Web.Controllers
                     .ThenInclude(x => x.Status)
                     .ToList()
             };
-            
+
             return View(model);
         }
-        
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -43,58 +43,69 @@ namespace Web.Controllers
                 Product = new Product(),
                 TaskStatuses = _context.TaskStatuses.ToList()
             };
-            
+
             return View("Edit", model);
         }
-        
+
         [HttpPost]
-        public IActionResult Store(ProductModel product)
+        public IActionResult Store(Product product)
         {
-            product.Tasks.AddRange(product.NewTasks);
+            product.Tasks = product.Tasks.Select(task => new Task
+            {
+                Name = task.Name,
+                Status = _context.TaskStatuses.Single(x => x.Id == task.Status.Id)
+            }).ToList();
+
             _context.Products.Add(product);
             _context.SaveChanges();
 
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index");
         }
-        
+
         [HttpGet]
         public IActionResult Edit(int productId)
         {
             var model = new ManageProductModel
             {
-                Product = _context.Products.Include(x => x.Tasks).ThenInclude(x => x.Status).Single(x => x.Id == productId),
+                Product = _context.Products.Include(x => x.Tasks).ThenInclude(x => x.Status)
+                    .Single(x => x.Id == productId),
                 TaskStatuses = _context.TaskStatuses.ToList()
             };
-            
+
             return View(model);
         }
-        
+
         [HttpPost]
-        public IActionResult Update(ProductModel product, int productId)
+        public IActionResult Update(Product product, int productId)
         {
-            var persistedProduct = _context.Products.Single(x => x.Id == productId);
+            var persistedProduct = _context.Products.Include(x => x.Tasks).Single(x => x.Id == productId);
             persistedProduct.Name = product.Name;
+
+            var latestTasksForProduct = product.Tasks.Select(x => x.Id);
+            var tasksToDelete = persistedProduct.Tasks.Where(x => !latestTasksForProduct.Contains(x.Id));
+
+            _context.Tasks.RemoveRange(tasksToDelete);
             
             product.Tasks.ForEach(task =>
             {
-                var isNewTask = task.Id == -1;
-                
+                var isNewTask = task.Id < 1;
+
                 var taskToPersist = isNewTask ? new Task() : _context.Tasks.Single(x => x.Id == task.Id);
                 taskToPersist.Name = task.Name;
-                taskToPersist.Status = _context.TaskStatuses.Single(x => x.Id == task.StatusId);
+                taskToPersist.Status = _context.TaskStatuses.Single(x => x.Id == task.Status.Id);
 
                 if (isNewTask)
                 {
                     persistedProduct.Tasks.Add(taskToPersist);
                 }
-                
+
                 var _ = isNewTask
                     ? _context.Tasks.Add(taskToPersist)
                     : _context.Tasks.Update(taskToPersist);
             });
-            
-            
+
+
             _context.SaveChanges();
 
 
