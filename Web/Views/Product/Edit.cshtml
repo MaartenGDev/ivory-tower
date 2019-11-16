@@ -8,27 +8,28 @@
             <form asp-controller="Product" asp-ann asp-action="@(Model.Product.Name == null ? "Store" : "Update")" method="post" asp-route-productId="@Model.Product.Id">
                 <div class="form-group">
                     <label for="inputBody">Body</label>
-                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Body" value="@Model.Product.Name">
+                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Name" value="@Model.Product.Name">
                 </div>
 
 
                 <div class="form-group">
                     <label for="inputTasks">Tasks</label>
-                    <div id="product-tasks">
-                        <div class="input-group mb-3" id="inputTasks">
-                            <div class="input-group-prepend">
-                                <select name="CategoryId" id="inputCategory" class="form-control custom-select">
-                                    @foreach (var status in Model.TaskStatuses)
-                                    {
-                                        <option value="@status.Id">@status.Name</option>
-                                    }
-                                </select>
-                            </div>
+                    <div id="productTasks">
+                    </div>
 
-                            <input type="text" class="form-control" placeholder="Task description" id="taskDescription">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-success" type="button" id="createTask">Create</button>
-                            </div>
+                    <div class="input-group mb-3" id="inputTasks">
+                        <div class="input-group-prepend">
+                            <select name="CategoryId" id="taskStatus" class="form-control custom-select">
+                                @foreach (var status in Model.TaskStatuses)
+                                {
+                                    <option value="@status.Id">@status.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="Task description" id="taskDescription">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="button" id="createTask">Create</button>
                         </div>
                     </div>
 
@@ -42,5 +43,6 @@
 
 <script>
      window.state = {};
+     window.state.tasks = @Html.Raw(Json.Serialize(Model.Product.Tasks));
      window.state.taskStatuses = @Html.Raw(Json.Serialize(Model.TaskStatuses));
 </script>

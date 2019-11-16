@@ -10,6 +10,7 @@ namespace DataContext.Data
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<AnnouncementCategory> AnnouncementCategories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskStatus> TaskStatuses { get; set; }
         
         public ApplicationDbContext(DbContextOptions options)

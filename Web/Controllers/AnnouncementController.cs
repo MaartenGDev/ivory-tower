@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using DataContext.Data;
 using DataContext.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
@@ -10,6 +11,7 @@ using Web.Models.Announcements;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class AnnouncementController : Controller
     {
         private readonly ApplicationDbContext _context;
