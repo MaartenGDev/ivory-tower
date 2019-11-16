@@ -86,7 +86,7 @@ namespace Web.Controllers
             var tasksToDelete = persistedProduct.Tasks.Where(x => !latestTasksForProduct.Contains(x.Id));
 
             _context.Tasks.RemoveRange(tasksToDelete);
-            
+
             product.Tasks.ForEach(task =>
             {
                 var isNewTask = task.Id < 1;
@@ -110,6 +110,18 @@ namespace Web.Controllers
 
 
             return RedirectToAction("Edit", new {productId});
+        }
+
+        public IActionResult Delete(int productId)
+        {
+            var product = _context.Products.Include(x => x.Tasks).Single(x => x.Id == productId);
+
+            product.Tasks.Clear();
+            
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
     }
 }

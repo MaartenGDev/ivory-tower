@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-4">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body max-content-height">
                 @foreach (var announcement in Model.Announcements)
                 {
                     <div>
@@ -16,7 +16,7 @@
                             <span class="text-info">@announcement.User.UserName.Split("@").First()</span>
                             <span class="text-black-50">@announcement.PublishedAt.Humanize()</span>
                         </div>
-                        @if (announcement.Id != Model.Announcements.Last().Id)
+                        @if (Model.Announcements.Count > 0 && announcement.Id != Model.Announcements.Last().Id)
                         {
                             <hr/>
                         }
@@ -29,7 +29,7 @@
     <div class="col-lg-5">
         <div class="card">
             <div class="card-body">
-                Hello world
+                <h5>Module Health</h5>
             </div>
         </div>
     </div>
@@ -37,7 +37,22 @@
     <div class="col-lg-3">
         <div class="card">
             <div class="card-body">
-                Hello world
+                @foreach (var product in Model.Products)
+                {
+                    <div>
+                        <h5>@product.Name</h5>
+                        <ul class="list-unstyled m-0">
+                        @foreach (var task in product.Tasks)
+                        {
+                            <li class="text-dark">@task.Status.Name @task.Name</li>
+                        }
+                        </ul>
+                        @if (Model.Products.Count > 0 && product.Id != Model.Products.Last().Id)
+                        {
+                            <hr/>
+                        }
+                    </div>
+                }
             </div>
         </div>
     </div>

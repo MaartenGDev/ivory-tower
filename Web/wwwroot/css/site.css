@@ -71,6 +71,11 @@ body {
 }
 
 
-.md-card{
-  
+.max-content-height{
+  height: calc(100vh - 200px);
+  overflow-y:auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

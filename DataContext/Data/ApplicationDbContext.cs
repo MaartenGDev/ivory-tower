@@ -31,7 +31,7 @@ namespace DataContext.Data
 
             modelBuilder.Entity<AnnouncementCategory>()
                 .HasKey(a => new {a.Id});
-            
+
             modelBuilder.Entity<Product>()
                 .HasKey(p => new {p.Id});
         }

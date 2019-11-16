@@ -30,6 +30,10 @@ namespace Web.Controllers
                     .Include(x => x.Category)
                     .Include(x => x.User)
                     .OrderByDescending(x => x.PublishedAt)
+                    .ToList(),
+                Products = _context.Products
+                    .Include(x => x.Tasks)
+                    .ThenInclude(x => x.Status)
                     .ToList()
             };
             

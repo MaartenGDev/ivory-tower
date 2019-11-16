@@ -9,6 +9,7 @@
         <th scope="col">Name</th>
         <th scope="col">Tasks Count</th>
         <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,9 @@
             <td>@product.Tasks.Count</td>
             <td>
                 <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-productId="@product.Id">Edit</a>
+            </td>
+            <td>
+                <a class="nav-link text-danger" asp-area="" asp-controller="Product" asp-action="Delete" asp-route-productId="@product.Id">Delete</a>
             </td>
         </tr>
     }
