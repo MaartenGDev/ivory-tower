@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StatsWorker;
 
 namespace Web
 {
@@ -33,6 +34,8 @@ namespace Web
             services.AddRazorPages();
 
             services.AddTransient<ModuleService>();
+            services.AddSingleton<ConfluenceService>();
+            services.AddHostedService<Worker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

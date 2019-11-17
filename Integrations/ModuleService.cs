@@ -13,6 +13,7 @@ namespace Integrations
                 new RepositoryModel
                 {
                     Name = "Sending Messages",
+                    IsHealthy = true,
                     Commits = new List<Commit>
                     {
                         new Commit
@@ -25,6 +26,7 @@ namespace Integrations
                 new RepositoryModel
                 {
                     Name = "Creating Messages",
+                    IsHealthy = false,
                     Commits = new List<Commit>
                     {
                         new Commit
@@ -37,6 +39,7 @@ namespace Integrations
                 new RepositoryModel
                 {
                     Name = "Discovering Clients",
+                    IsHealthy = true,
                     Commits = new List<Commit>
                     {
                         new Commit

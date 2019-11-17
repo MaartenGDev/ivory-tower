@@ -40,7 +40,8 @@ namespace Web.Controllers
                     .ThenInclude(x => x.Status)
                     .ToList(),
                 Repositories = _moduleService.GetRepositories(),
-                Events = _context.Events.ToList()
+                Events = _context.Events.ToList(),
+                Contributors = _context.Contributors.OrderBy(x => x.EditCount).ToList()
             };
             
             return View(model);

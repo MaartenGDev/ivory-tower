@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "StatsWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

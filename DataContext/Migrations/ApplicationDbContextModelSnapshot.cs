@@ -66,6 +66,28 @@ namespace DataContext.Migrations
                     b.ToTable("AnnouncementCategories");
                 });
 
+            modelBuilder.Entity("DataContext.Models.Contributor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EditCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contributors");
+                });
+
             modelBuilder.Entity("DataContext.Models.Event", b =>
                 {
                     b.Property<int>("Id")

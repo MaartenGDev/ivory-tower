@@ -13,10 +13,16 @@ namespace DataContext.Data
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskStatus> TaskStatuses { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Contributor> Contributors { get; set; }
         
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
+        }
+
+        public ApplicationDbContext()
+        {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +40,10 @@ namespace DataContext.Data
                 .HasKey(a => new {a.Id});
 
             modelBuilder.Entity<Event>()
-                .HasKey(e => new {e.Id});
+                .HasKey(e => new {e.Id});     
+            
+            modelBuilder.Entity<Contributor>()
+                .HasKey(c => new {c.Id});
         }
     }
 }

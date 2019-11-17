@@ -3,7 +3,7 @@
 
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
         <div class="card">
             <div class="card-body max-content-height">
                 @foreach (var announcement in Model.Announcements)
@@ -25,29 +25,9 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-8 align-items-stretch d-flex flex-column">
+    <div class="col-lg-9 align-items-stretch d-flex flex-column">
         <div class="row align-items-stretch">
             <div class="col-lg-8">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5>Module Health</h5>
-                        @foreach (var repository in Model.Repositories)
-                        {
-                            <h6>@repository.Name</h6>
-                            <ul class="list-unstyled">
-
-                                @foreach (var commit in repository.Commits)
-                                {
-                                    <span class="text-info">@commit.Hash</span>
-                                    <span class="text-black-50">@commit.Message</span>
-                                }
-                            </ul>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-body">
                         @foreach (var product in Model.Products)
@@ -69,15 +49,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row align-items-stretch mt-4 flex-grow-1">
-            <div class="col-lg-8">
+
+            <div class="col-lg-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5>Commit History</h5>
+                        <h5>Module Health</h5>
                         @foreach (var repository in Model.Repositories)
                         {
-                            <h6>@repository.Name</h6>
+                            <h6><span class="dot dot-healthy-@repository.IsHealthy"></span> @repository.Name</h6>
                             <ul class="list-unstyled">
 
                                 @foreach (var commit in repository.Commits)
@@ -90,6 +69,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row align-items-stretch mt-4 flex-grow-1">
+            <div class="col-lg-8">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Confluence Activity</h5>
+
+                        <canvas id="canvas" style="display: block;"></canvas>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-lg-4">
                 <div class="card h-100">
@@ -98,7 +88,8 @@
                         <ul class="list-unstyled m-0">
                             @foreach (var eEvent in Model.Events)
                             {
-                                <li class="text-dark"><span class="text-info">@eEvent.DateTime.Humanize()</span> @eEvent.Name</li>
+                                <li class="text-dark">
+                                    <span class="text-info">@eEvent.DateTime.Humanize()</span> @eEvent.Name</li>
                             }
                         </ul>
                     </div>
@@ -107,3 +98,44 @@
         </div>
     </div>
 </div>
+
+<script>
+
+var barChartData = {
+    labels: @Html.Raw(Json.Serialize(Model.Contributors.Select(x => x.Name))),
+    datasets: [{
+        label: 'Edit Count',
+        backgroundColor: '#4BC0C0',
+        data: @Html.Raw(Json.Serialize(Model.Contributors.Select(x => x.EditCount)))
+    }, {
+        label: 'Comment Count',
+        backgroundColor: '#FFCD56',
+        data: @Html.Raw(Json.Serialize(Model.Contributors.Select(x => x.CommentCount)))
+    }]
+
+};
+
+
+window.onload = function() {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+};
+</script>

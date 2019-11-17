@@ -22,6 +22,13 @@
     <ItemGroup>
       <ProjectReference Include="..\DataContext\DataContext.csproj" />
       <ProjectReference Include="..\Integrations\Integrations.csproj" />
+      <ProjectReference Include="..\StatsWorker\StatsWorker.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="chromedriver">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
