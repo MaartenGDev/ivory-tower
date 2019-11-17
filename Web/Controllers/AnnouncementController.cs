@@ -55,7 +55,7 @@ namespace Web.Controllers
             _context.SaveChanges();
 
 
-            return RedirectToAction("Index", "Announcement");
+            return RedirectToAction("Index");
         }
         
         [HttpGet]
@@ -68,6 +68,15 @@ namespace Web.Controllers
             };
             
             return View(model);
+        }
+        
+        [HttpGet]
+        public IActionResult Delete(int announcementId)
+        {
+            var announcement = _context.Announcements.Single(x => x.Id == announcementId);
+            _context.Announcements.Remove(announcement);
+            
+            return RedirectToAction("Index");
         }
     }
 }

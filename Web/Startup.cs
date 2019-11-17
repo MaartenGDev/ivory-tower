@@ -1,4 +1,5 @@
 using DataContext.Data;
+using Integrations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,8 @@ namespace Web
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
             services.AddRazorPages();
-            
+
+            services.AddTransient<ModuleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

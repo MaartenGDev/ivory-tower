@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DataContext.Data;
+using Integrations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Web.Models;
+using Web.Models.Home;
 
 namespace Web.Controllers
 {
@@ -16,10 +18,12 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ModuleService _moduleService;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, ModuleService moduleService)
         {
             _context = context;
+            _moduleService = moduleService;
         }
 
         public IActionResult Index()
@@ -34,7 +38,8 @@ namespace Web.Controllers
                 Products = _context.Products
                     .Include(x => x.Tasks)
                     .ThenInclude(x => x.Status)
-                    .ToList()
+                    .ToList(),
+                Repositories = _moduleService.GetRepositories()
             };
             
             return View(model);

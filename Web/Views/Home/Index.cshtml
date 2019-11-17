@@ -1,5 +1,5 @@
 ﻿@using Humanizer
-@model Web.Models.HomeIndexModel
+@model Web.Models.Home.HomeIndexModel
 
 
 <div class="row">
@@ -30,6 +30,18 @@
         <div class="card">
             <div class="card-body">
                 <h5>Module Health</h5>
+                 @foreach (var repository in Model.Repositories)
+                 {
+                     <h6>@repository.Name</h6>
+                     <ul class="list-unstyled">
+
+                     @foreach (var commit in repository.Commits)
+                     {
+                         <span class="text-info">@commit.Hash</span> <span class="text-black-50">@commit.Message</span>
+
+                     }
+                     </ul>
+                 }
             </div>
         </div>
     </div>
@@ -42,10 +54,10 @@
                     <div>
                         <h5>@product.Name</h5>
                         <ul class="list-unstyled m-0">
-                        @foreach (var task in product.Tasks)
-                        {
-                            <li class="text-dark">@task.Status.Name @task.Name</li>
-                        }
+                            @foreach (var task in product.Tasks)
+                            {
+                                <li class="text-dark">@task.Status.Name @task.Name</li>
+                            }
                         </ul>
                         @if (Model.Products.Count > 0 && product.Id != Model.Products.Last().Id)
                         {

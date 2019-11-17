@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DataContext\DataContext.csproj" />
+      <ProjectReference Include="..\Integrations\Integrations.csproj" />
     </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@
         <th scope="col">Body</th>
         <th scope="col">Created By</th>
         <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,9 @@
             <td>@announcement.User.UserName</td>
             <td>
                 <a class="nav-link" asp-area="" asp-controller="Announcement" asp-action="Edit" asp-route-announcementId="@announcement.Id">Edit</a>
+            </td>
+            <td>
+                <a class="nav-link text-danger" asp-area="" asp-controller="Announcement" asp-action="Delete" asp-route-announcementId="@announcement.Id">Delete</a>
             </td>
         </tr>
     }
