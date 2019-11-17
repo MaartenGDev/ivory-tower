@@ -1,0 +1,22 @@
+@model Web.Models.Events.ManageEventModel
+
+<h4>@(Model.Event.Name == null ? "Create" : "Update") Announcement</h4>
+
+<div class="row">
+    <div class="card  col-12">
+        <div class="card-body">
+            <form asp-controller="Event" asp-ann asp-action="@(Model.Event.Name == null ? "Store" : "Update")"  method="post" asp-route-eventId="@Model.Event.Id">
+                 <div class="form-group">
+                                <label for="inputDateTime">DateTime</label>
+                                <input type="datetime" class="form-control" id="inputDateTime" placeholder="DateTime" name="DateTime" value="@Model.Event.DateTime">
+                            </div>
+
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Name" name="Name" value="@Model.Event.Name">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -25,46 +25,84 @@
             </div>
         </div>
     </div>
-
-    <div class="col-lg-5">
-        <div class="card">
-            <div class="card-body">
-                <h5>Module Health</h5>
-                 @foreach (var repository in Model.Repositories)
-                 {
-                     <h6>@repository.Name</h6>
-                     <ul class="list-unstyled">
-
-                     @foreach (var commit in repository.Commits)
-                     {
-                         <span class="text-info">@commit.Hash</span> <span class="text-black-50">@commit.Message</span>
-
-                     }
-                     </ul>
-                 }
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                @foreach (var product in Model.Products)
-                {
-                    <div>
-                        <h5>@product.Name</h5>
-                        <ul class="list-unstyled m-0">
-                            @foreach (var task in product.Tasks)
-                            {
-                                <li class="text-dark">@task.Status.Name @task.Name</li>
-                            }
-                        </ul>
-                        @if (Model.Products.Count > 0 && product.Id != Model.Products.Last().Id)
+    <div class="col-lg-8 align-items-stretch d-flex flex-column">
+        <div class="row align-items-stretch">
+            <div class="col-lg-8">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Module Health</h5>
+                        @foreach (var repository in Model.Repositories)
                         {
-                            <hr/>
+                            <h6>@repository.Name</h6>
+                            <ul class="list-unstyled">
+
+                                @foreach (var commit in repository.Commits)
+                                {
+                                    <span class="text-info">@commit.Hash</span>
+                                    <span class="text-black-50">@commit.Message</span>
+                                }
+                            </ul>
                         }
                     </div>
-                }
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div>
+                                <h5>@product.Name</h5>
+                                <ul class="list-unstyled m-0">
+                                    @foreach (var task in product.Tasks)
+                                    {
+                                        <li class="text-dark">@task.Status.Name @task.Name</li>
+                                    }
+                                </ul>
+                                @if (Model.Products.Count > 0 && product.Id != Model.Products.Last().Id)
+                                {
+                                    <hr/>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-stretch mt-4 flex-grow-1">
+            <div class="col-lg-8">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Commit History</h5>
+                        @foreach (var repository in Model.Repositories)
+                        {
+                            <h6>@repository.Name</h6>
+                            <ul class="list-unstyled">
+
+                                @foreach (var commit in repository.Commits)
+                                {
+                                    <span class="text-info">@commit.Hash</span>
+                                    <span class="text-black-50">@commit.Message</span>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Upcoming Events</h5>
+                        <ul class="list-unstyled m-0">
+                            @foreach (var eEvent in Model.Events)
+                            {
+                                <li class="text-dark"><span class="text-info">@eEvent.DateTime.Humanize()</span> @eEvent.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

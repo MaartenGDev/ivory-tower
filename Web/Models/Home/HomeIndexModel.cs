@@ -9,5 +9,6 @@ namespace Web.Models.Home
         public List<Announcement> Announcements { get; set; }
         public List<Product> Products { get; set; }
         public List<RepositoryModel> Repositories { get; set; }
+        public List<Event> Events { get; set; }
     }
 }

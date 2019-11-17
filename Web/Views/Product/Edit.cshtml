@@ -7,8 +7,8 @@
         <div class="card-body">
             <form asp-controller="Product" asp-ann asp-action="@(Model.Product.Name == null ? "Store" : "Update")" method="post" asp-route-productId="@Model.Product.Id">
                 <div class="form-group">
-                    <label for="inputBody">Body</label>
-                    <input type="text" class="form-control" id="inputBody" placeholder="Body" name="Name" value="@Model.Product.Name">
+                    <label for="inputName">Body</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Body" name="Name" value="@Model.Product.Name">
                 </div>
 
 

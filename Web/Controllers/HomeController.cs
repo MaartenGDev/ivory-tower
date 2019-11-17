@@ -39,7 +39,8 @@ namespace Web.Controllers
                     .Include(x => x.Tasks)
                     .ThenInclude(x => x.Status)
                     .ToList(),
-                Repositories = _moduleService.GetRepositories()
+                Repositories = _moduleService.GetRepositories(),
+                Events = _context.Events.ToList()
             };
             
             return View(model);

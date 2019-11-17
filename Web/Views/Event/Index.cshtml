@@ -1,0 +1,31 @@
+@using Humanizer
+@model Web.Models.Events.EventIndexModel;
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-success" asp-area="" asp-controller="Event" asp-action="Create">Create</a>
+</div>
+<table class="table mt-2">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">DateTime</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var eEvent in Model.Events)
+    {
+        <tr>
+            <td>@eEvent.Name</td>
+            <td>@eEvent.DateTime.Humanize()</td>
+            <td>
+                <a class="nav-link" asp-area="" asp-controller="Event" asp-action="Edit" asp-route-eventId="@eEvent.Id">Edit</a>
+            </td>
+            <td>
+                <a class="nav-link text-danger" asp-area="" asp-controller="Event" asp-action="Delete" asp-route-eventId="@eEvent.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

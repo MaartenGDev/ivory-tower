@@ -70,11 +70,26 @@ namespace Web.Controllers
             return View(model);
         }
         
+        [HttpPost]
+        public IActionResult Update(Announcement announcement, int announcementId)
+        {
+            var persistedAnnouncement = _context.Announcements.Single(x => x.Id == announcementId);
+            persistedAnnouncement.Body = announcement.Body;
+            persistedAnnouncement.Category = _context.AnnouncementCategories.Single(x => x.Id == announcement.Category.Id);
+
+            _context.Announcements.Update(persistedAnnouncement);
+            _context.SaveChanges();
+            
+            return RedirectToAction("Edit", new {announcementId});
+        }
+        
         [HttpGet]
         public IActionResult Delete(int announcementId)
         {
             var announcement = _context.Announcements.Single(x => x.Id == announcementId);
             _context.Announcements.Remove(announcement);
+
+            _context.SaveChanges();
             
             return RedirectToAction("Index");
         }

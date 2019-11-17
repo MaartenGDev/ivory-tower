@@ -12,6 +12,7 @@ namespace DataContext.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskStatus> TaskStatuses { get; set; }
+        public DbSet<Event> Events { get; set; }
         
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -32,8 +33,8 @@ namespace DataContext.Data
             modelBuilder.Entity<AnnouncementCategory>()
                 .HasKey(a => new {a.Id});
 
-            modelBuilder.Entity<Product>()
-                .HasKey(p => new {p.Id});
+            modelBuilder.Entity<Event>()
+                .HasKey(e => new {e.Id});
         }
     }
 }
