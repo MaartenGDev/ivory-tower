@@ -4,7 +4,7 @@ using Integrations.Models;
 
 namespace Integrations
 {
-    public class ModuleService
+    public class ModuleHealthService
     {
         public List<RepositoryModel> GetRepositories()
         {

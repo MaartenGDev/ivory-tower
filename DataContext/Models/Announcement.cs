@@ -12,7 +12,6 @@ namespace DataContext.Models
         [Required]
         public string Body { get; set; }
         public DateTime PublishedAt { get; set; }
-        public int CategoryId { get; set; }
         public virtual AnnouncementCategory Category { get; set; }
         public virtual IdentityUser User { get; set; }
     }

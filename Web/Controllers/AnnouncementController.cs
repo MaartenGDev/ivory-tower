@@ -28,6 +28,7 @@ namespace Web.Controllers
                 Announcements = _context.Announcements
                     .Include(x => x.Category)
                     .Include(x => x.User)
+                    .OrderByDescending(x => x.PublishedAt)
                     .ToList()
             };
             
@@ -51,6 +52,8 @@ namespace Web.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             announcement.User = _context.Users.Single(x => x.Id == userId);
+            announcement.Category = _context.AnnouncementCategories.Single(x => x.Id == announcement.Category.Id);
+
             _context.Announcements.Add(announcement);
             _context.SaveChanges();
 
@@ -63,7 +66,7 @@ namespace Web.Controllers
         {
             var model = new ManageAnnouncementModel
             {
-                Announcement = _context.Announcements.Single(x => x.Id == announcementId),
+                Announcement = _context.Announcements.Include(x => x.Category).Single(x => x.Id == announcementId),
                 AnnouncementCategories = _context.AnnouncementCategories.ToList()
             };
             

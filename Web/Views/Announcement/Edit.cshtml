@@ -8,10 +8,10 @@
             <form asp-controller="Announcement" asp-ann asp-action="@(Model.Announcement.Body == null ? "Store" : "Update")"  method="post" asp-route-announcementId="@Model.Announcement.Id">
                 <div class="form-group">
                     <label for="inputCategory">Category</label>
-                    <select name="CategoryId" id="inputCategory" class="form-control">
+                    <select name="Category.Id" id="inputCategory" class="form-control">
                         @foreach (var category in Model.AnnouncementCategories)
                         {
-                            <option value="@category.Id">@category.Name</option>
+                            <option selected="@(Model.Announcement.Category.Id == category.Id)" value="@category.Id">@category.Name</option>
                         }
                     </select>
                 </div>

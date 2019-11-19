@@ -12,13 +12,14 @@ using Task = System.Threading.Tasks.Task;
 
 namespace StatsWorker
 {
-    public class Worker : BackgroundService
+    public class StatsSyncingWorker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private const int MinutesBetweenSyncs = 60;
+        private readonly ILogger<StatsSyncingWorker> _logger;
         private readonly ConfluenceService _confluenceService;
         private readonly IServiceScopeFactory _scopeFactory;
 
-        public Worker(ILogger<Worker> logger, ConfluenceService confluenceService, IServiceScopeFactory scopeFactory)
+        public StatsSyncingWorker(ILogger<StatsSyncingWorker> logger, ConfluenceService confluenceService, IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
             _confluenceService = confluenceService;
@@ -31,7 +32,9 @@ namespace StatsWorker
             while (!stoppingToken.IsCancellationRequested)
             {
                 CacheConfluenceStats();
-                await Task.Delay(60000, stoppingToken);
+                
+                const int delayInMilliseconds = MinutesBetweenSyncs * 60 * 60;
+                await Task.Delay(delayInMilliseconds, stoppingToken);
             }
         }
 

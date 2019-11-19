@@ -18,12 +18,12 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ModuleService _moduleService;
+        private readonly ModuleHealthService _moduleHealthService;
 
-        public HomeController(ApplicationDbContext context, ModuleService moduleService)
+        public HomeController(ApplicationDbContext context, ModuleHealthService moduleHealthService)
         {
             _context = context;
-            _moduleService = moduleService;
+            _moduleHealthService = moduleHealthService;
         }
 
         public IActionResult Index()
@@ -39,7 +39,7 @@ namespace Web.Controllers
                     .Include(x => x.Tasks)
                     .ThenInclude(x => x.Status)
                     .ToList(),
-                Repositories = _moduleService.GetRepositories(),
+                Repositories = _moduleHealthService.GetRepositories(),
                 Events = _context.Events.ToList(),
                 Contributors = _context.Contributors.OrderBy(x => x.EditCount).ToList()
             };
